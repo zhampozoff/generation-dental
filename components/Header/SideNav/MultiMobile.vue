@@ -26,7 +26,7 @@
       <!-- Single Nav -->
       <v-list-item
         v-else
-        :href="item.link"
+        @click="handleClick(item)"
         :class="{ current: curURL === (curOrigin+langPath+item.link)}"
         link
       >
@@ -35,18 +35,6 @@
         </v-list-item-title>
       </v-list-item>
     </fragment>
-    <v-divider />
-    <v-list-item
-      v-for="(item, index) in ['login', 'register']"
-      :key="index"
-      :href="item"
-      :class="{ current: curURL === (curOrigin+langPath+item)}"
-      link
-    >
-      <v-list-item-content>
-        <v-list-item-title class="menu-list">{{ $t('common.header_'+item) }}</v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
   </v-list>
 </template>
 
@@ -78,6 +66,11 @@ export default {
     dataMenu: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    handleClick(item) {
+      this.$router.push(item.link)
     }
   }
 }

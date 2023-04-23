@@ -2,7 +2,7 @@
   <fragment>
     <v-list-group
       v-if="menuItems.child"
-      sub-group 
+      sub-group
       no-action
       class="side-group"
     >
@@ -22,7 +22,7 @@
     <!-- Single Nav -->
     <v-list-item
       v-else
-      :href="menuItems.link || '#'"
+      @click="handleClick(menuItems)"
       :class="{ current: curURL === (curOrigin+langPath+menuItems.link)}"
       class="side-group-link"
     >
@@ -58,6 +58,11 @@ export default {
     this.curURL = window.location.href
     this.curOrigin = window.location.origin
     this.langPath = '/' + this.$i18n.locale
+  },
+  methods: {
+    handleClick(item) {
+      this.$router.push(item.link)
+    }
   }
 }
 </script>
